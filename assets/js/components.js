@@ -11,7 +11,7 @@
 
   /* ---- Navigation links (single source) ---- */
   const NAV = [
-    { label: "Home", href: "index.html" },
+    { label: "Home", href: "/" },
     { label: "About", href: "about.html" },
     { label: "Categories", href: "categories.html" },
     { label: "Products", href: "products.html" },
@@ -20,13 +20,13 @@
   ];
 
   /* Detect current page for active link highlighting */
-  const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const current = (location.pathname.split("/").pop() || "/").toLowerCase();
 
   const navItems = (extraClass = "") =>
     NAV.map((n) => {
       const active =
         current === n.href.toLowerCase() ||
-          (current === "" && n.href === "index.html")
+          (current === "" && n.href === "/")
           ? "active"
           : "";
       return `<li class="nav-item"><a class="nav-link ${active} ${extraClass}" href="${n.href}">${n.label}</a></li>`;
@@ -50,7 +50,7 @@
     <header class="site-header" id="siteHeader">
       <nav class="navbar navbar-expand-lg py-2">
         <div class="container">
-          <a class="navbar-brand" href="index.html" aria-label="${C.brand} home">
+          <a class="navbar-brand" href="/" aria-label="${C.brand} home">
             <span class="brand-logo"><i class="bi bi-basket2-fill"></i></span>
             <span class="brand-text">VINAYAK<small>FRUIT &amp; VEG MART</small></span>
           </a>
@@ -149,7 +149,7 @@
           <div class="col-lg-2 col-md-6 col-6">
             <h5>Quick Links</h5>
             <ul class="list-unstyled footer-links">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="about.html">About Us</a></li>
               <li><a href="products.html">Products</a></li>
               <li><a href="faq.html">FAQ</a></li>
