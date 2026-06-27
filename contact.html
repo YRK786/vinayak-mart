@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Vinayak Fruit &amp; Vegetable Mart</title>
+  <meta name="description" content="Contact Vinayak Fruit & Vegetable Mart in Gandhidham, Kutch. Call +91 9650067172, visit our store or send us a message. Open Mon-Sun 7AM-10PM.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="vk-header"></div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT INFO CARDS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="contact-info-card">
+            <div class="icon"><i class="bi bi-geo-alt-fill"></i></div>
+            <div><h6 class="mb-1">Address</h6><p class="text-muted small mb-0">Plot No. 174/9AE, Maheshwari Nagar, Gandhidham, Kutch, Gujarat</p></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="contact-info-card">
+            <div class="icon"><i class="bi bi-telephone-fill"></i></div>
+            <div><h6 class="mb-1">Phone</h6><p class="text-muted small mb-0"><a href="tel:+919650067172" class="text-muted">+91 9650067172</a></p></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="contact-info-card">
+            <div class="icon"><i class="bi bi-whatsapp"></i></div>
+            <div><h6 class="mb-1">WhatsApp</h6><p class="text-muted small mb-0"><a href="https://wa.me/919650067172" class="text-muted" target="_blank" rel="noopener">Chat &amp; order now</a></p></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="contact-info-card">
+            <div class="icon"><i class="bi bi-clock-fill"></i></div>
+            <div><h6 class="mb-1">Business Hours</h6><p class="text-muted small mb-0">Mon - Sun: 7:00 AM - 10:00 PM</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORM + MAP ============ -->
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Contact form -->
+        <div class="col-lg-6 reveal">
+          <div class="form-card h-100">
+            <h3 class="mb-1">Send Us a Message</h3>
+            <p class="text-muted">We'd love to hear from you. Fill in the form and we'll get back soon.</p>
+            <form onsubmit="VK.toast('Message sent! We will reply shortly.','bi-send-check-fill');this.reset();return false;">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Name *</label><input type="text" class="form-control" required></div>
+                <div class="col-md-6"><label class="form-label">Phone *</label><input type="tel" class="form-control" required></div>
+                <div class="col-12"><label class="form-label">Email</label><input type="email" class="form-control"></div>
+                <div class="col-12"><label class="form-label">Subject</label><input type="text" class="form-control"></div>
+                <div class="col-12"><label class="form-label">Message *</label><textarea class="form-control" rows="4" required></textarea></div>
+                <div class="col-12"><button type="submit" class="btn btn-vk w-100"><i class="bi bi-send"></i> Send Message</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Map + business hours -->
+        <div class="col-lg-6 reveal">
+          <div class="map-embed mb-4" style="height:300px">
+            <iframe title="Vinayak Mart Location" src="https://www.google.com/maps?q=Maheshwari+Nagar,Gandhidham,Kutch,Gujarat&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="form-card">
+            <h5 class="mb-3"><i class="bi bi-clock-history text-green"></i> Business Hours</h5>
+            <ul class="list-unstyled mb-0">
+              <li class="d-flex justify-content-between py-2 border-bottom"><span>Monday - Friday</span><span class="fw-semibold">7:00 AM - 10:00 PM</span></li>
+              <li class="d-flex justify-content-between py-2 border-bottom"><span>Saturday</span><span class="fw-semibold">7:00 AM - 10:00 PM</span></li>
+              <li class="d-flex justify-content-between py-2"><span>Sunday</span><span class="fw-semibold">7:00 AM - 10:00 PM</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="vk-footer"></div>
+  <div id="vk-floating"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/components.js"></script>
+</body>
+</html>

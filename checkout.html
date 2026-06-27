@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Vinayak Fruit &amp; Vegetable Mart</title>
+  <meta name="description" content="Securely place your order at Vinayak Fruit & Vegetable Mart. Enter billing and shipping details and choose your payment method.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="vk-header"></div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Checkout</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ CHECKOUT ============ -->
+  <section class="section">
+    <div class="container">
+      <form onsubmit="VK.toast('Order placed successfully! We will contact you shortly.','bi-bag-check-fill');return false;">
+        <div class="row g-4">
+
+          <!-- Left: forms -->
+          <div class="col-lg-8">
+            <!-- Billing details -->
+            <div class="form-card mb-4">
+              <h4 class="mb-3"><i class="bi bi-person-circle text-green"></i> Billing Details</h4>
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">First Name *</label><input type="text" class="form-control" required></div>
+                <div class="col-md-6"><label class="form-label">Last Name *</label><input type="text" class="form-control" required></div>
+                <div class="col-md-6"><label class="form-label">Phone *</label><input type="tel" class="form-control" placeholder="+91" required></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control"></div>
+              </div>
+            </div>
+
+            <!-- Shipping address -->
+            <div class="form-card mb-4">
+              <h4 class="mb-3"><i class="bi bi-truck text-green"></i> Shipping Address</h4>
+              <div class="row g-3">
+                <div class="col-12"><label class="form-label">Address *</label><input type="text" class="form-control" placeholder="House no, street, area" required></div>
+                <div class="col-md-6"><label class="form-label">City *</label><input type="text" class="form-control" value="Gandhidham" required></div>
+                <div class="col-md-3"><label class="form-label">State *</label><input type="text" class="form-control" value="Gujarat" required></div>
+                <div class="col-md-3"><label class="form-label">Pincode *</label><input type="text" class="form-control" required></div>
+                <div class="col-12"><label class="form-label">Order Notes</label><textarea class="form-control" rows="2" placeholder="Delivery instructions (optional)"></textarea></div>
+              </div>
+            </div>
+
+            <!-- Payment method -->
+            <div class="form-card">
+              <h4 class="mb-3"><i class="bi bi-credit-card text-green"></i> Payment Method</h4>
+              <div class="payment-option active" onclick="VKpay.select(this)">
+                <div class="form-check mb-0">
+                  <input class="form-check-input" type="radio" name="payment" id="pay-cod" checked>
+                  <label class="form-check-label fw-semibold" for="pay-cod"><i class="bi bi-cash"></i> Cash on Delivery</label>
+                  <div class="small text-muted ms-4">Pay with cash when your order is delivered.</div>
+                </div>
+              </div>
+              <div class="payment-option" onclick="VKpay.select(this)">
+                <div class="form-check mb-0">
+                  <input class="form-check-input" type="radio" name="payment" id="pay-upi">
+                  <label class="form-check-label fw-semibold" for="pay-upi"><i class="bi bi-phone"></i> UPI / Online</label>
+                  <div class="small text-muted ms-4">Pay securely using UPI, card or net banking.</div>
+                </div>
+              </div>
+              <div class="payment-option" onclick="VKpay.select(this)">
+                <div class="form-check mb-0">
+                  <input class="form-check-input" type="radio" name="payment" id="pay-wa">
+                  <label class="form-check-label fw-semibold" for="pay-wa"><i class="bi bi-whatsapp"></i> Confirm on WhatsApp</label>
+                  <div class="small text-muted ms-4">Place the order and confirm payment over WhatsApp.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: order summary -->
+          <div class="col-lg-4">
+            <div class="cart-summary">
+              <h5 class="mb-3">Order Summary</h5>
+              <div id="checkoutSummary"></div>
+              <button type="submit" class="btn btn-vk w-100 mt-3"><i class="bi bi-bag-check"></i> Place Order</button>
+              <a href="cart.html" class="btn btn-vk-outline w-100 mt-2">Back to Cart</a>
+              <p class="small text-muted text-center mt-3 mb-0"><i class="bi bi-shield-lock"></i> Your details are safe with us.</p>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <div id="vk-footer"></div>
+  <div id="vk-floating"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    window.VKpay = {
+      select(el) {
+        document.querySelectorAll(".payment-option").forEach((o) => o.classList.remove("active"));
+        el.classList.add("active");
+        el.querySelector('input[type="radio"]').checked = true;
+      },
+    };
+  </script>
+</body>
+</html>

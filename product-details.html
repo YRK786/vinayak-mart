@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Vinayak Fruit &amp; Vegetable Mart</title>
+  <meta name="description" content="View fresh product details, prices, ratings and specifications at Vinayak Fruit & Vegetable Mart. Order online or on WhatsApp.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="vk-header"></div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 id="phTitle">Product Details</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+          <li class="breadcrumb-item active" aria-current="page" id="bcName">Product</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT DETAIL ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 g-lg-5" id="productDetail">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPECIFICATIONS + DESCRIPTION TABS ============ -->
+  <section class="section section-soft pt-0" id="specSection" style="padding-top:0">
+    <div class="container">
+      <ul class="nav nav-pills justify-content-center mb-4" id="detailTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabDesc" type="button">Description</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabSpec" type="button">Specifications</button>
+        </li>
+      </ul>
+      <div class="tab-content form-card">
+        <div class="tab-pane fade show active" id="tabDesc">
+          <p class="text-muted mb-0" id="descText"></p>
+        </div>
+        <div class="tab-pane fade" id="tabSpec">
+          <table class="table table-borderless mb-0" id="specTable"></table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RELATED PRODUCTS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center reveal">
+        <span class="eyebrow">You may also like</span>
+        <h2>Related Products</h2>
+      </div>
+      <div class="row g-3 g-md-4" id="relatedProducts"></div>
+    </div>
+  </section>
+
+  <div id="vk-footer"></div>
+  <div id="vk-floating"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(location.search);
+      const id = Number(params.get("id")) || VK_PRODUCTS[0].id;
+      const p = VK.findProduct(id) || VK_PRODUCTS[0];
+      const off = VK.discount(p);
+
+      document.getElementById("phTitle").textContent = p.name;
+      document.getElementById("bcName").textContent = p.name;
+      document.title = p.name + " | Vinayak Fruit & Vegetable Mart";
+
+      // Gallery: reuse main image + a few generic fresh images for thumbnails
+      const gallery = [p.image,
+        "assets/images/fruits.jpg",
+        "assets/images/grocery-store.jpg",
+        "assets/images/fruit-basket.jpg"];
+
+      const waText = encodeURIComponent("Hello Vinayak Mart, I want to order: " + p.name);
+
+      document.getElementById("productDetail").innerHTML = `
+        <div class="col-lg-6">
+          <div class="gallery-main"><img src="${gallery[0]}" alt="${p.name}" id="mainImage"></div>
+          <div class="gallery-thumbs">
+            ${gallery.map((g, idx) => `<img src="${g}" alt="${p.name} view ${idx + 1}" class="${idx === 0 ? "active" : ""}" onclick="VKdetail.setImage('${g}', this)">`).join("")}
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <span class="product-cat">${p.category}</span>
+          <h2 class="mt-1">${p.name}</h2>
+          <div class="product-rating mb-2" style="font-size:1rem">${VK.starsHtml(p.rating)} <span>(${p.reviews} reviews)</span></div>
+          <div class="product-price mb-3" style="font-size:1.1rem">
+            <span class="now" style="font-size:1.8rem">${VK.money(p.price)}</span>
+            ${p.oldPrice ? `<span class="was">${VK.money(p.oldPrice)}</span>` : ""}
+            ${off ? `<span class="badge bg-danger ms-2">${off}% OFF</span>` : ""}
+            <span class="text-muted ms-2">/ ${p.unit}</span>
+          </div>
+          <p class="text-muted">Farm-fresh ${p.name.toLowerCase()} sourced and hand-picked daily for the best quality. Perfect for your everyday cooking and healthy eating.</p>
+
+          <div class="d-flex align-items-center gap-3 my-3">
+            <span class="fw-semibold">Quantity</span>
+            <div class="qty-selector">
+              <button type="button" onclick="VKdetail.changeQty(-1)" aria-label="Decrease">&minus;</button>
+              <input type="text" id="detailQty" value="1" readonly aria-label="Quantity">
+              <button type="button" onclick="VKdetail.changeQty(1)" aria-label="Increase">&plus;</button>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-vk btn-lg" onclick="VKdetail.addToCart()"><i class="bi bi-cart-plus"></i> Add to Cart</button>
+            <a href="https://wa.me/919650067172?text=${waText}" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp Order</a>
+            <button class="btn btn-vk-outline btn-lg" onclick="VK.toggleWishlist(${p.id}, null)"><i class="bi bi-heart"></i></button>
+          </div>
+
+          <ul class="list-unstyled mt-4 small text-muted">
+            <li class="mb-2"><i class="bi bi-truck text-green"></i> Free delivery on orders above ₹500</li>
+            <li class="mb-2"><i class="bi bi-shield-check text-green"></i> 100% quality guarantee</li>
+            <li><i class="bi bi-arrow-repeat text-green"></i> Easy replacement on quality issues</li>
+          </ul>
+        </div>`;
+
+      document.getElementById("descText").textContent =
+        `${p.name} from Vinayak Fruit & Vegetable Mart is sourced fresh every morning directly from trusted local farmers. We ensure every ${p.unit} is carefully selected for ripeness, taste and nutrition. Whether for daily cooking or special occasions, you get premium quality at honest prices with the convenience of fast home delivery in Gandhidham.`;
+
+      document.getElementById("specTable").innerHTML = `
+        <tr><th width="35%">Category</th><td>${p.category}</td></tr>
+        <tr><th>Unit</th><td>${p.unit}</td></tr>
+        <tr><th>Price</th><td>${VK.money(p.price)} / ${p.unit}</td></tr>
+        <tr><th>Freshness</th><td>Sourced daily</td></tr>
+        <tr><th>Origin</th><td>Local farms, Gujarat</td></tr>
+        <tr><th>Storage</th><td>Keep refrigerated for longer freshness</td></tr>
+        <tr><th>Availability</th><td><span class="text-green fw-semibold">In Stock</span></td></tr>`;
+
+      // Related products (same category, excluding current)
+      const related = VK_PRODUCTS.filter((x) => x.categoryId === p.categoryId && x.id !== p.id);
+      const fill = VK_PRODUCTS.filter((x) => x.id !== p.id && x.categoryId !== p.categoryId);
+      VK.renderProducts("relatedProducts", related.concat(fill).slice(0, 4), "col-6 col-md-3");
+
+      // Detail page controller
+      window.VKdetail = {
+        qty: 1,
+        setImage(src, el) {
+          document.getElementById("mainImage").src = src;
+          document.querySelectorAll(".gallery-thumbs img").forEach((i) => i.classList.remove("active"));
+          el.classList.add("active");
+        },
+        changeQty(d) {
+          this.qty = Math.max(1, this.qty + d);
+          document.getElementById("detailQty").value = this.qty;
+        },
+        addToCart() { VK.addToCart(p.id, this.qty); },
+      };
+
+      VK.initReveal();
+    });
+  </script>
+</body>
+</html>

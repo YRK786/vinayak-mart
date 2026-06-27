@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Vinayak Fruit &amp; Vegetable Mart</title>
+  <meta name="description" content="Review your shopping cart at Vinayak Fruit & Vegetable Mart and proceed to a quick, secure checkout.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="vk-header"></div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Shopping Cart</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cart</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ CART ============ -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Empty state -->
+      <div id="cartEmpty" class="empty-state d-none">
+        <i class="bi bi-cart-x"></i>
+        <h3 class="mt-3">Your cart is empty</h3>
+        <p class="text-muted">Looks like you haven't added anything yet.</p>
+        <a href="products.html" class="btn btn-vk"><i class="bi bi-bag"></i> Start Shopping</a>
+      </div>
+
+      <!-- Cart with items -->
+      <div id="cartWrap" class="row g-4">
+        <div class="col-lg-8">
+          <div class="table-responsive cart-table form-card p-0">
+            <table class="table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th class="ps-4">Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="cartBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Coupon -->
+          <form class="d-flex gap-2 mt-3" style="max-width:420px" onsubmit="return VK.applyCoupon(event)">
+            <input type="text" class="form-control" placeholder="Coupon code (try FRESH10)">
+            <button type="submit" class="btn btn-vk-outline flex-shrink-0"><i class="bi bi-tag"></i> Apply</button>
+          </form>
+        </div>
+
+        <!-- Summary -->
+        <div class="col-lg-4">
+          <div class="cart-summary" id="cartSummary"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="vk-footer"></div>
+  <div id="vk-floating"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/components.js"></script>
+</body>
+</html>

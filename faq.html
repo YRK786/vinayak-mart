@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Vinayak Fruit &amp; Vegetable Mart</title>
+  <meta name="description" content="Frequently asked questions about ordering, delivery, payment and freshness at Vinayak Fruit & Vegetable Mart, Gandhidham.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="vk-header"></div>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Frequently Asked Questions</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ACCORDION ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="section-head text-center reveal">
+            <span class="eyebrow">Need Help?</span>
+            <h2>Got Questions? We've Got Answers</h2>
+            <p>Everything you need to know about shopping with Vinayak Mart.</p>
+          </div>
+          <div class="accordion faq-accordion" id="faqAccordion"></div>
+
+          <div class="text-center mt-5 reveal">
+            <p class="text-muted">Still have questions?</p>
+            <a href="contact.html" class="btn btn-vk">Contact Us</a>
+            <a href="https://wa.me/919650067172" class="btn btn-whatsapp" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="vk-footer"></div>
+  <div id="vk-floating"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script>
+    // ----- FAQ data + rendering -----
+    const FAQS = [
+      { q: "What areas do you deliver to?", a: "We deliver across Gandhidham and nearby areas in Kutch, Gujarat. For deliveries outside our standard zone, please contact us on WhatsApp and we'll do our best to help." },
+      { q: "Is there a minimum order value?", a: "There is no strict minimum order, but orders above ₹500 qualify for free home delivery. Smaller orders may have a nominal delivery charge of ₹40." },
+      { q: "How fresh are your fruits and vegetables?", a: "All produce is sourced fresh every morning directly from local farmers and markets. We hand-pick each item to ensure top quality before it reaches you." },
+      { q: "How can I place an order?", a: "You can order directly through our website by adding items to your cart and checking out, or simply message us on WhatsApp at +91 9650067172 for a quick order." },
+      { q: "What payment methods do you accept?", a: "We accept Cash on Delivery, UPI, cards and net banking. You can also confirm your order and payment conveniently over WhatsApp." },
+      { q: "Do you update prices daily?", a: "Yes. Fruit and vegetable rates change with the market, so we update our Today's Rate List every morning for full transparency." },
+      { q: "Can I get Kesar Mango all year round?", a: "Kesar Mango is a seasonal fruit, typically available during the summer months. Follow us on WhatsApp to know exactly when fresh stock arrives." },
+      { q: "What if I receive a damaged or low-quality item?", a: "Customer satisfaction is our priority. If any item doesn't meet our quality standards, contact us within 24 hours for a quick replacement or refund." },
+      { q: "How long does delivery take?", a: "Orders placed before our evening cut-off are usually delivered the same day. Others are delivered the next morning, fresh and on time." },
+      { q: "Can I schedule a delivery time?", a: "Yes, you can mention your preferred delivery slot in the order notes during checkout or while ordering on WhatsApp, and we'll try to accommodate it." },
+      { q: "Do you offer bulk or wholesale orders?", a: "Absolutely. We supply to restaurants, caterers and events. Contact us on WhatsApp for special bulk pricing and regular supply arrangements." },
+      { q: "Are your products organic?", a: "We offer a mix of conventional and naturally grown produce. Please ask us about specific items if you are looking for organically grown fruits and vegetables." },
+      { q: "How are the vegetables packed?", a: "We pack produce in clean, food-safe, eco-friendly packaging to keep everything fresh and hygienic during delivery." },
+      { q: "Can I modify or cancel my order?", a: "Yes, you can modify or cancel your order before it is dispatched. Just reach out to us quickly on WhatsApp or by phone." },
+      { q: "Do you have a physical store I can visit?", a: "Yes! Visit us at Plot No. 174/9AE, Maheshwari Nagar, Gandhidham, Kutch, Gujarat. We are open Mon–Sun, 7:00 AM to 10:00 PM." },
+      { q: "How do I stay updated on offers?", a: "Subscribe to our newsletter or message us on WhatsApp to receive daily rates, seasonal offers and special combo deals." },
+    ];
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("faqAccordion").innerHTML = FAQS.map(
+        (f, i) => `
+        <div class="accordion-item reveal">
+          <h3 class="accordion-header" id="faqH${i}">
+            <button class="accordion-button ${i === 0 ? "" : "collapsed"}" type="button" data-bs-toggle="collapse" data-bs-target="#faqC${i}" aria-expanded="${i === 0}" aria-controls="faqC${i}">
+              ${f.q}
+            </button>
+          </h3>
+          <div id="faqC${i}" class="accordion-collapse collapse ${i === 0 ? "show" : ""}" aria-labelledby="faqH${i}" data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">${f.a}</div>
+          </div>
+        </div>`
+      ).join("");
+      VK.initReveal();
+    });
+  </script>
+</body>
+</html>
