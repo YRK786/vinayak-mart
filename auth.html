@@ -141,6 +141,34 @@
             </button>
           </div>
 
+          <!-- Current Location Button -->
+          <button class="btn-location w-100" id="locationBtn" onclick="Auth.detectLocation()">
+            <div class="location-btn-left">
+              <div class="location-ping" id="locationPing">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div>
+                <div class="location-btn-title">Use Current Location</div>
+                <div class="location-btn-sub" id="locationSubText">Detect your delivery area automatically</div>
+              </div>
+            </div>
+            <i class="bi bi-chevron-right location-arrow" id="locationArrow"></i>
+          </button>
+
+          <!-- Location Result Card (hidden until detected) -->
+          <div class="location-result" id="locationResult" style="display:none;">
+            <div class="location-result-inner">
+              <i class="bi bi-pin-map-fill"></i>
+              <div>
+                <div class="lr-title">Delivering to</div>
+                <div class="lr-address" id="lrAddress">Detecting…</div>
+              </div>
+              <button class="lr-change" onclick="Auth.clearLocation()" title="Change location">
+                <i class="bi bi-pencil"></i>
+              </button>
+            </div>
+          </div>
+
           <p class="auth-footer-note">
             By continuing, you agree to receive marketing communications from Vinayak Mart.
           </p>

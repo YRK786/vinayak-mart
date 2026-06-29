@@ -261,6 +261,105 @@ const Auth = (() => {
     }, 1500);
   }
 
+  /* ── Current Location Detection ── */
+  function detectLocation() {
+    const btn      = document.getElementById('locationBtn');
+    const subText  = document.getElementById('locationSubText');
+    const pingIcon = document.querySelector('#locationPing i');
+    const arrow    = document.getElementById('locationArrow');
+
+    if (!navigator.geolocation) {
+      showToast('Geolocation is not supported by your browser', 'error');
+      return;
+    }
+
+    /* Detecting state */
+    btn.classList.add('detecting');
+    btn.classList.remove('detected');
+    subText.textContent = 'Detecting your location…';
+    pingIcon.className  = 'bi bi-arrow-repeat';
+    arrow.className     = 'bi bi-hourglass-split location-arrow';
+
+    navigator.geolocation.getCurrentPosition(
+      /* SUCCESS */
+      (pos) => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+
+        /* Reverse geocode using OpenStreetMap Nominatim (free, no key needed) */
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+          .then(r => r.json())
+          .then(data => {
+            const addr = data.address || {};
+            const parts = [
+              addr.road || addr.neighbourhood || addr.suburb,
+              addr.city || addr.town || addr.village || addr.county,
+              addr.state
+            ].filter(Boolean);
+            const displayAddr = parts.length ? parts.join(', ') : `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+
+            /* Update button to detected state */
+            btn.classList.remove('detecting');
+            btn.classList.add('detected');
+            subText.textContent   = 'Location detected ✓';
+            pingIcon.className    = 'bi bi-check-lg';
+            arrow.className       = 'bi bi-chevron-right location-arrow';
+
+            /* Show result card */
+            const result  = document.getElementById('locationResult');
+            const lrAddr  = document.getElementById('lrAddress');
+            lrAddr.textContent = displayAddr;
+            result.style.display = 'block';
+
+            showToast('📍 Location detected: ' + (parts[1] || displayAddr), 'success');
+          })
+          .catch(() => {
+            /* Fallback: just show coordinates */
+            btn.classList.remove('detecting');
+            btn.classList.add('detected');
+            subText.textContent = 'Location detected ✓';
+            pingIcon.className  = 'bi bi-check-lg';
+            arrow.className     = 'bi bi-chevron-right location-arrow';
+
+            const result = document.getElementById('locationResult');
+            document.getElementById('lrAddress').textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            result.style.display = 'block';
+            showToast('📍 Coordinates detected', 'success');
+          });
+      },
+      /* ERROR */
+      (err) => {
+        btn.classList.remove('detecting');
+        pingIcon.className = 'bi bi-geo-alt-fill';
+        arrow.className    = 'bi bi-chevron-right location-arrow';
+        subText.textContent = 'Detect your delivery area automatically';
+
+        const msgs = {
+          1: 'Location permission denied. Please allow access.',
+          2: 'Location unavailable. Try again.',
+          3: 'Location request timed out.'
+        };
+        showToast(msgs[err.code] || 'Could not detect location', 'error');
+      },
+      { timeout: 10000, enableHighAccuracy: true }
+    );
+  }
+
+  function clearLocation() {
+    const btn      = document.getElementById('locationBtn');
+    const subText  = document.getElementById('locationSubText');
+    const pingIcon = document.querySelector('#locationPing i');
+    const arrow    = document.getElementById('locationArrow');
+    const result   = document.getElementById('locationResult');
+
+    btn.classList.remove('detected', 'detecting');
+    subText.textContent = 'Detect your delivery area automatically';
+    pingIcon.className  = 'bi bi-geo-alt-fill';
+    arrow.className     = 'bi bi-chevron-right location-arrow';
+    result.style.display = 'none';
+    document.getElementById('lrAddress').textContent = 'Detecting…';
+    showToast('Location cleared', 'info');
+  }
+
   /* ── Continue / Logout ── */
   function continueToHome() {
     showToast('Redirecting to homepage…', 'info');
@@ -334,7 +433,7 @@ const Auth = (() => {
   }
 
   /* ── Public API ── */
-  return { sendOtp, verifyOtp, resendOtp, goBack, register, continueToHome, logout, init };
+  return { sendOtp, verifyOtp, resendOtp, goBack, register, continueToHome, logout, detectLocation, clearLocation, init };
 
 })();
 
