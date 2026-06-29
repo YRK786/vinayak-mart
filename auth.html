@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Sign Up | Vinayak Mart</title>
+  <meta name="description" content="Login or create an account on Vinayak Mart to track your orders, get exclusive deals and fast checkout.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Auth CSS -->
+  <link href="assets/css/auth.css" rel="stylesheet">
+</head>
+<body class="auth-body">
+
+  <!-- ======= BACKGROUND BLOBS ======= -->
+  <div class="auth-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- ======= MAIN AUTH WRAPPER ======= -->
+  <div class="auth-wrapper">
+
+    <!-- ---- LEFT PANEL (brand / illustration) ---- -->
+    <div class="auth-brand d-none d-lg-flex">
+      <div class="brand-inner">
+        <div class="brand-logo-wrap">
+          <span class="brand-emoji">🥭</span>
+          <div>
+            <div class="brand-name">Vinayak Mart</div>
+            <div class="brand-tagline">Fresh Fruits &amp; Vegetables</div>
+          </div>
+        </div>
+
+        <div class="brand-illustration">
+          <div class="illus-card">
+            <span class="illus-icon">🚚</span>
+            <div>
+              <div class="illus-title">Free Home Delivery</div>
+              <div class="illus-sub">On orders above ₹500</div>
+            </div>
+          </div>
+          <div class="illus-card">
+            <span class="illus-icon">⚡</span>
+            <div>
+              <div class="illus-title">Same-Day Delivery</div>
+              <div class="illus-sub">Order before 2 PM</div>
+            </div>
+          </div>
+          <div class="illus-card">
+            <span class="illus-icon">🌿</span>
+            <div>
+              <div class="illus-title">100% Fresh &amp; Organic</div>
+              <div class="illus-sub">Hand-picked daily</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-perks">
+          <div class="perk-badge"><i class="bi bi-shield-check"></i> Secure Login</div>
+          <div class="perk-badge"><i class="bi bi-lock"></i> OTP Verified</div>
+          <div class="perk-badge"><i class="bi bi-heart"></i> Trusted by 500+ families</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- RIGHT PANEL (auth card) ---- -->
+    <div class="auth-card-wrap">
+      <div class="auth-card" id="authCard">
+
+        <!-- Mobile Logo (visible only on small screens) -->
+        <div class="mobile-logo d-lg-none text-center mb-4">
+          <span class="mobile-logo-emoji">🥭</span>
+          <div class="mobile-logo-text">Vinayak Mart</div>
+        </div>
+
+        <!-- ===== SCREEN 1: Enter Mobile Number ===== -->
+        <div class="auth-screen active" id="screenMobile">
+          <div class="screen-header">
+            <h1 class="screen-title">Login / Sign Up</h1>
+            <p class="screen-sub">Enter your mobile number to continue</p>
+          </div>
+
+          <div class="input-group-auth">
+            <label class="auth-label">Mobile Number</label>
+            <div class="phone-input-wrap">
+              <div class="country-code">
+                <img src="https://flagcdn.com/w20/in.png" alt="India" width="20">
+                <span>+91</span>
+              </div>
+              <input
+                type="tel"
+                id="mobileInput"
+                class="auth-input"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10"
+                inputmode="numeric"
+                pattern="[6-9][0-9]{9}"
+                autocomplete="tel"
+              >
+            </div>
+            <div class="input-hint"><i class="bi bi-info-circle"></i> OTP will be sent to this number</div>
+          </div>
+
+          <div class="tnc-wrap">
+            <input type="checkbox" id="tncCheck" class="tnc-checkbox">
+            <label for="tncCheck" class="tnc-label">
+              I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button class="btn-auth btn-primary-auth w-100" id="sendOtpBtn" onclick="Auth.sendOtp()">
+            <span class="btn-text">Request OTP</span>
+            <i class="bi bi-arrow-right btn-icon"></i>
+          </button>
+
+          <div class="divider-text">or continue with</div>
+
+          <div class="social-row">
+            <button class="btn-social" id="googleLoginBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Google
+            </button>
+            <button class="btn-social" id="whatsappLoginBtn">
+              <i class="bi bi-whatsapp" style="color:#25D366;font-size:18px;"></i>
+              WhatsApp
+            </button>
+          </div>
+
+          <p class="auth-footer-note">
+            By continuing, you agree to receive marketing communications from Vinayak Mart.
+          </p>
+        </div>
+
+        <!-- ===== SCREEN 2: OTP Verification ===== -->
+        <div class="auth-screen" id="screenOtp">
+          <div class="screen-header">
+            <button class="back-btn" onclick="Auth.goBack('screenMobile')" id="otpBackBtn">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <h1 class="screen-title">Verify OTP</h1>
+            <p class="screen-sub">OTP sent to <strong id="displayNumber">+91 XXXXXXXXXX</strong></p>
+          </div>
+
+          <div class="otp-illustration">
+            <div class="otp-phone-icon"><i class="bi bi-phone-vibrate"></i></div>
+            <div class="otp-pulse"></div>
+          </div>
+
+          <div class="input-group-auth">
+            <label class="auth-label">Enter 6-digit OTP</label>
+            <div class="otp-boxes" id="otpBoxes">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp0" autocomplete="one-time-code">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp1">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp2">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp3">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp4">
+              <input class="otp-box" maxlength="1" inputmode="numeric" type="text" id="otp5">
+            </div>
+            <div class="otp-hint">
+              <span class="demo-otp-badge"><i class="bi bi-lightbulb"></i> Demo OTP: <strong>1 2 3 4 5 6</strong></span>
+            </div>
+          </div>
+
+          <div class="resend-row">
+            <span class="resend-timer" id="resendTimer">Resend OTP in <strong id="countdownVal">30s</strong></span>
+            <button class="resend-btn" id="resendBtn" onclick="Auth.resendOtp()" disabled>
+              <i class="bi bi-arrow-clockwise"></i> Resend OTP
+            </button>
+          </div>
+
+          <button class="btn-auth btn-primary-auth w-100" id="verifyOtpBtn" onclick="Auth.verifyOtp()">
+            <span class="btn-text">Verify OTP</span>
+            <i class="bi bi-shield-check btn-icon"></i>
+          </button>
+
+          <p class="auth-footer-note">
+            Didn't receive OTP? Check if the number is correct or try a different method.
+          </p>
+        </div>
+
+        <!-- ===== SCREEN 3: New User — Registration ===== -->
+        <div class="auth-screen" id="screenRegister">
+          <div class="screen-header">
+            <button class="back-btn" onclick="Auth.goBack('screenOtp')" id="regBackBtn">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <h1 class="screen-title">Create Account</h1>
+            <p class="screen-sub">Tell us a bit about yourself 😊</p>
+          </div>
+
+          <div class="new-user-badge">
+            <i class="bi bi-stars"></i> New User Detected — Welcome to Vinayak Mart!
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="input-group-auth">
+                <label class="auth-label">First Name</label>
+                <input type="text" class="auth-input" id="firstName" placeholder="Ravi" autocomplete="given-name">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group-auth">
+                <label class="auth-label">Last Name</label>
+                <input type="text" class="auth-input" id="lastName" placeholder="Sharma" autocomplete="family-name">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group-auth">
+                <label class="auth-label">Email Address <span class="opt-tag">optional</span></label>
+                <input type="email" class="auth-input" id="emailInput" placeholder="you@example.com" autocomplete="email">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group-auth">
+                <label class="auth-label">Date of Birth <span class="opt-tag">optional</span></label>
+                <input type="date" class="auth-input" id="dobInput" autocomplete="bday">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group-auth">
+                <label class="auth-label">Gender <span class="opt-tag">optional</span></label>
+                <div class="gender-row">
+                  <label class="gender-option" id="gMale">
+                    <input type="radio" name="gender" value="male"> <i class="bi bi-gender-male"></i> Male
+                  </label>
+                  <label class="gender-option" id="gFemale">
+                    <input type="radio" name="gender" value="female"> <i class="bi bi-gender-female"></i> Female
+                  </label>
+                  <label class="gender-option" id="gOther">
+                    <input type="radio" name="gender" value="other"> <i class="bi bi-person"></i> Other
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-auth btn-primary-auth w-100 mt-3" id="registerBtn" onclick="Auth.register()">
+            <span class="btn-text">Create Account</span>
+            <i class="bi bi-check-circle btn-icon"></i>
+          </button>
+
+          <p class="auth-footer-note mt-3">
+            Already have an account? <a href="#" onclick="Auth.goBack('screenMobile');return false;">Login here</a>
+          </p>
+        </div>
+
+        <!-- ===== SCREEN 4: Returning User — Welcome Back ===== -->
+        <div class="auth-screen" id="screenWelcome">
+          <div class="screen-header text-center">
+            <h1 class="screen-title">Welcome Back! 👋</h1>
+            <p class="screen-sub">We're glad you're here again</p>
+          </div>
+
+          <div class="welcome-avatar" id="welcomeAvatar">
+            <div class="avatar-circle"><i class="bi bi-person-fill"></i></div>
+            <div class="avatar-name" id="welcomeName">Ravi Sharma</div>
+            <div class="avatar-mobile" id="welcomeMobile">+91 98765XXXXX</div>
+          </div>
+
+          <div class="account-features">
+            <div class="feature-item">
+              <i class="bi bi-bag-check"></i>
+              <div>
+                <div class="fi-title">My Orders</div>
+                <div class="fi-sub">Track your past &amp; current orders</div>
+              </div>
+              <i class="bi bi-chevron-right fi-arrow"></i>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-geo-alt"></i>
+              <div>
+                <div class="fi-title">Saved Addresses</div>
+                <div class="fi-sub">Manage delivery locations</div>
+              </div>
+              <i class="bi bi-chevron-right fi-arrow"></i>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-heart"></i>
+              <div>
+                <div class="fi-title">Wishlist</div>
+                <div class="fi-sub">Your favourite products</div>
+              </div>
+              <i class="bi bi-chevron-right fi-arrow"></i>
+            </div>
+          </div>
+
+          <button class="btn-auth btn-primary-auth w-100" id="continueBtn" onclick="Auth.continueToHome()">
+            <span class="btn-text">Continue Shopping</span>
+            <i class="bi bi-bag btn-icon"></i>
+          </button>
+
+          <button class="btn-auth btn-ghost-auth w-100 mt-2" onclick="Auth.logout()">
+            <i class="bi bi-box-arrow-right"></i> Switch Account
+          </button>
+        </div>
+
+        <!-- ===== SCREEN 5: Success ===== -->
+        <div class="auth-screen" id="screenSuccess">
+          <div class="success-anim text-center">
+            <div class="success-circle">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <h2 class="success-title" id="successTitle">You're all set!</h2>
+            <p class="success-sub" id="successSub">Account created successfully. Welcome to Vinayak Mart!</p>
+            <div class="confetti-row">🥭 🥦 🍅 🌽 🍇 🥕</div>
+            <button class="btn-auth btn-primary-auth mt-4" id="successHomeBtn" onclick="Auth.continueToHome()" style="min-width:200px;">
+              <i class="bi bi-house"></i> Go to Homepage
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /auth-card -->
+
+      <!-- Back to home link -->
+      <div class="text-center mt-4">
+        <a href="index.html" class="back-home-link"><i class="bi bi-arrow-left"></i> Back to Vinayak Mart</a>
+      </div>
+    </div><!-- /auth-card-wrap -->
+  </div><!-- /auth-wrapper -->
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="auth-toast-container" id="authToastContainer"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Auth JS -->
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
