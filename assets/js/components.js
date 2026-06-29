@@ -81,6 +81,10 @@
               <i class="bi bi-cart3"></i>
               <span class="badge rounded-pill" data-vk-cart-count>0</span>
             </a>
+            <a href="auth.html" class="btn-login-header" id="headerLoginBtn" aria-label="Login or Sign Up">
+              <i class="bi bi-person-circle"></i>
+              <span>Login</span>
+            </a>
           </div>
 
           <!-- Mobile quick actions -->
@@ -108,6 +112,11 @@
         <ul class="navbar-nav">
           ${navItems()}
           <li class="nav-item mt-3">
+            <a href="auth.html" class="btn btn-login-mobile w-100" id="mobileLoginBtn">
+              <i class="bi bi-person-circle"></i> Login / Sign Up
+            </a>
+          </li>
+          <li class="nav-item mt-2">
             <a href="https://wa.me/${C.whatsapp}" class="btn btn-whatsapp w-100" target="_blank" rel="noopener">
               <i class="bi bi-whatsapp"></i> WhatsApp Order
             </a>
